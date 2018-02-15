@@ -11,73 +11,59 @@ PROGRAMA PARA CALCULAR LA DESCIACION ESTANDAR Y VARIANZA
 
 """
 
-# ************************* Varianza y Desviación Estándar *************************
-
-# -*- coding: utf-8 -*-
-
 from math import pow, sqrt
 
-listaDatos = list()
 restar = list()
 elevar = list()
 
-def imprimir(texto, valor):
-    print('\n{} {}'.format(texto, valor))
 
-# ************************* Paso 1 y Paso 5 *************************
-defsumatoria(datos):
+
+def sumatoria(datos):
         sumatoria = float(sum(datos))
         return sumatoria
-# ************************* Paso 2 *************************
-defmedia(datos):
+
+def media(datos):
     n = len(datos)
     mediana = sumatoria(datos) / n
     return round(mediana,2)
-# ************************* Paso 3 *************************
-defrestar_media_datos(datos):
+
+
+def restar_media_datos(datos):
 
     mediana = media(datos)
-    imprimir ('Media: ', mediana)
 
     for i in datos:
         op = i - mediana
         restar.append(op)
 
-# ************************* Paso 4 *************************
-defelevar_cuadrado(datos):
+def elevar_cuadrado(datos):
 
     for i in datos:
         op = pow (i, 2)
         elevar.append(op)
 
-# ************************* Paso 6 *************************
 
-defraiz_datos():
+
+def raiz_datos():
     desviacion = sqrt(media(elevar))
     return round(desviacion,2)
 
-# ************************* Inicio *************************
-defmain():
+def main():
+    #datos
+    listaDatos = [13, 14, 15, 15, 15, 16, 17, 18, 20]
 
-    repetir = int(raw_input('Cuantos valores quieres ingresar? : '))
-
-    for i in range(repetir):
-            number = int(raw_input('Escribe el dato: '))
-            listaDatos.append(number) # agregar el valor a la lista de datos
-
-    suma = sumatoria(listaDatos)
-    imprimir ('Sumatoria: ', suma)
-
+ 
     restar_media_datos(listaDatos)
 
     elevar_cuadrado(restar)
 
-    mediana = media(elevar)
-    imprimir ('Varianza: ', mediana)
+    Varianza = media(elevar)
+    print ("\n")
+    print ('Varianza: ', Varianza, "\n")
 
     desviacion = raiz_datos()
-    imprimir ('Desviación Estándar: ', desviacion)
-    print ('\n')
+    print ('Desviación Estándar: ', desviacion)
+    print ("\n")
 
-if __name__ == '__main__': #Incio
+if __name__ == "__main__": #Incio
     main()

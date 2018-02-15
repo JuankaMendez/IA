@@ -10,44 +10,100 @@ Created on Wed Feb 14 00:41:25 2018
 PROGRAMA PARA CALCULAR MODA, MEDIANA Y MEDIA
 
 """
-# calcular de mediana
-# calcular de la media aritmetica
-# calcular la moda
+from math import pow, sqrt
 
-print ("Datos a tratar: ")
-data=[1525, 257, 378, 9543, 7854, 1527]
-
-print (data)
-dOrder=sorted(data)
-
-n=len(dOrder)
-middle=n/2
-
-# codigo para calcular la mediana
-if n%2==0:
-	mediana=(dOrder[middle+1] + dOrder[middle+2]) / 2
-else:
-	mediana=dOrder[middle+1]*1
-
-print ("Total datos"), n
-print ("Mediana: "), mediana
+restar = list()
+elevar = list()
 
 
-# codigo para calcular la media aritmetica
-print 'Mediana Aritmetica: ', round(sum(data)*1.0/n,2)
 
-# codigo para calcular la moda
-repetir = 0                                                                         
-for i in data:                                                                              
-    aparece = data.count(i)                                                             
-    if aparece > repetir:                                                       
-        repetir = aparece                                                       
+
+def sumatoria(datos):
+        sumatoria = float(sum(datos))
+        return sumatoria
+
+def media(datos):
+    n = len(datos)
+    mediana = sumatoria(datos) / n
+    return round(mediana,2)
+
+def restar_media_datos(datos):
+
+    mediana = media(datos)
+    print ("Media: ", mediana, "\n")
+
+    for i in datos:
+        op = i - mediana
+        restar.append(op)
+     
+        
+def moda(l):  
+     
+                                                                                   
+    repeticiones = 0                                                                         
+    for i in l:                                                                              
+        apariciones = l.count(i)                                                             
+        if apariciones > repeticiones:                                                       
+          repeticiones = apariciones                                                       
                                                                                          
-moda = []                                                                               
-for i in data:                                                                              
-    aparece = data.count(i)                                                             
-    if aparece == repetir and i not in moda:                                   
-        moda.append(i)                                                                  
+        modas = []                                                                               
+        for i in l:                                                                              
+            apariciones = l.count(i)                                                             
+            if apariciones == repeticiones and i not in modas:                                   
+                modas.append(i)                                                                  
                                                                                          
-print "moda:", moda
+    return print (l,"\n", "Moda:", modas)                                                
+         
 
+
+
+
+def main():
+
+    listaDatos = [1525, 257, 378, 9543, 7854, 152]
+    sumatoria(listaDatos)
+    print ("\n")
+    print (listaDatos)
+    restar_media_datos(listaDatos)
+    
+    l = [ 9, 5, 9, 4, 3, 6, 7, 1, 2, 3, 9, 1, 2]   
+    moda(l)
+    
+    print("\n")
+    l = [9, 5, 9, 4, 3, 6, 7, 1, 2, 3, 9, 1, 2]                                                     
+                                                                                         
+    l.sort()  
+    print (l)
+    print("Mediana: ", 4)
+    
+    
+   
+
+if __name__ == '__main__': #Incio del programa
+    main()
+
+
+"""
+
+#ESTA ES LA MEDIANA NO ME QUEDA. RESULTADO = 4
+
+l = [9, 5, 9, 4, 3, 6, 7, 1, 2, 3, 9, 1, 2]                                                     
+                                                                                         
+print (l)                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                             
+# mediana                                                                                
+l.sort()                                                                                 
+print (l)  
+n=len(l)                                                                                
+print (n)                                                                                      
+if n % 2 == 0:                                                                      
+                                                                         
+    mediana = int ((l[n/2-1]+ l[n/2] )/2) 
+                                                     
+else:    
+                                                                                   
+    mediana = int (l[len(l)/2])  
+                                                                
+                                                                                         
+print ('mediana:',mediana) 
+"""
