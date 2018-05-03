@@ -1,0 +1,183 @@
+from pythoned.grafos import Grafo, Vertice
+from pythoned.basicas import Cola
+
+def bea(g,inicio):
+  inicio.asignarDistancia(0)
+  inicio.asignarPredecesor(None)
+  colaVertices = Cola()
+  colaVertices.agregar(inicio)
+  while (colaVertices.tamano() > 0):
+    verticeActual = colaVertices.avanzar()
+    for vecino in verticeActual.obtenerConexiones():
+      if (vecino.obtenerColor() == 'blanco'):
+        vecino.asignarColor('gris')
+        vecino.asignarDistancia(verticeActual.obtenerDistancia() + 1)
+        vecino.asignarPredecesor(verticeActual)
+        colaVertices.agregar(vecino)
+    verticeActual.asignarColor('negro')
+
+def recorrer(y):
+    x = y
+    while (x.obtenerPredecesor()):
+        print(x.obtenerId())
+        x = x.obtenerPredecesor()
+    print(x.obtenerId())
+
+recorrer(g.obtenerVertice('sage'))
+
+
+
+from time import time
+
+def bubbleSort(lista):
+    global comparaciones
+    n = len(lista)
+
+    for i in xrange(1, n):
+        for j in xrange(n-i):
+            comparaciones += 1
+
+            if lista[j] > lista[j+1]:
+                lista[j], lista[j+1] = lista[j+1], lista[j]
+
+lista = [36, 71, 16, 21, 73, 9, 0, 40, 66, 5]
+comparaciones = 0
+
+t0 = time()
+bubbleSort(lista)
+t1 = time()
+
+print "Lista ordenada:"
+print lista, "\n"
+
+print "Tiempo: {0:f} segundos".format(t1 - t0)
+print "Comparaciones:", comparaciones
+ InsertionSort.py
+# -*- coding: utf-8 -*-
+
+from time import time
+
+def insertionSort(lista):
+    n = len(lista)
+    global comparaciones
+
+    for i in xrange(1, n):
+        val = lista[i]
+        j = i
+
+        while j > 0 and lista[j-1] > val:
+            lista[j] = lista[j-1]
+            j -= 1
+            comparaciones += 1
+
+        lista[j] = val
+
+
+lista = [36, 71, 16, 21, 73, 9, 0, 40, 66, 5]
+comparaciones = 0
+
+t0 = time()
+insertionSort(lista)
+t1 = time()
+
+print "Lista ordenada:"
+print lista, "\n"
+
+print "Tiempo: {0:f} segundos".format(t1 - t0)
+print "Comparaciones:", comparaciones
+ mergeSort.py
+# -*- coding: utf-8 -*-
+
+from time import time
+
+def mergeSort(lista):
+    if len(lista) <= 1:
+        return lista
+
+    medio = len(lista) / 2
+    izquierda = lista[:medio]
+    derecha = lista[medio:]
+
+    izquierda = mergeSort(izquierda)
+    derecha = mergeSort(derecha)
+
+    return merge(izquierda, derecha)
+
+def merge(listaA, listaB):
+    global comparaciones
+    lista_nueva = []
+    a = 0
+    b = 0
+
+    while a < len(listaA) and b < len(listaB):
+        comparaciones += 1
+
+        if listaA[a] < listaB[b]:
+            lista_nueva.append(listaA[a])
+            a += 1
+        else:
+            lista_nueva.append(listaB[b])
+            b += 1
+
+    while a < len(listaA):
+        lista_nueva.append(listaA[a])
+        a += 1
+
+    while b < len(listaB):
+        lista_nueva.append(listaB[b])
+        b += 1
+
+    return lista_nueva
+
+
+lista = [36, 71, 16, 21, 73, 9, 0, 40, 66, 5]
+comparaciones = 0
+
+t0 = time()
+lista = mergeSort(lista)
+t1 = time()
+
+print "Lista ordenada:"
+print lista, "\n"
+
+print "Tiempo: {0:f} segundos".format(t1 - t0)
+print "Comparaciones:", comparaciones
+ quicksort.py
+# -*- coding: utf-8 -*-
+
+from time import time
+
+def particion(lista, izq, der):
+	global comparaciones
+	pivote = lista[der]
+	indice = izq
+
+	for i in xrange(izq, der):
+		comparaciones += 1
+		
+		if lista[i] <= pivote:
+			lista[indice], lista[i] = lista[i], lista[indice]
+			indice += 1
+
+	lista[indice], lista[der] = lista[der], lista[indice]
+	return indice
+
+def quicksort(lista, izq, der):
+    if izq < der:
+    	pivote_indice = particion(lista, izq, der)
+    	quicksort(lista, izq, pivote_indice-1)
+    	quicksort(lista, pivote_indice+1, der)
+
+
+lista = [36, 71, 16, 21, 73, 9, 0, 40, 66, 5]
+comparaciones = 0
+
+t0 = time()
+quicksort(lista, 0, len(lista)-1)
+t1 = time()
+
+print "Lista ordenada:"
+print lista, "\n"
+
+print "Tiempo: {0:f} segundos".format(t1 - t0)
+print "Comparaciones:", comparaciones
